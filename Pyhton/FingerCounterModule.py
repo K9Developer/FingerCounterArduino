@@ -16,11 +16,24 @@ class fingerCounter():
             fingers = []
 
             # Thumb
-            # If the x of tip of the finger (thumb) is smaller than the lowest bone of the thumb
-            if lmList[self.tipIds[0]][1] < lmList[self.tipIds[0] - 1][1]:
-                fingers.append(1)
+            # Checks if the x coordinate of tip of the thumb is smaller than the x coordinate of the tip of the little
+            # finger. its used to check if my hand is facing towards the cam or not
+            if lmList[self.tipIds[0]][1] > lmList[self.tipIds[4]][1]:
+
+                # If the hand is facing the camera it checks if the thumb's x coordinate
+                # is bigger than the index finger's x coordinate
+                if lmList[self.tipIds[0]][2] < lmList[5][2]:
+                    fingers.append(1)
+                else:
+                    fingers.append(0)
             else:
-                fingers.append(0)
+
+                # If the hand is not facing the camera it checks if the thumb's x coordinate
+                # is smaller than the index finger's x coordinate
+                if lmList[self.tipIds[0]][1] < lmList[self.tipIds[1] - 2][1]:
+                    fingers.append(1)
+                else:
+                    fingers.append(0)
 
             # 4 Fingers
             for id in range(1, 5):
